@@ -1,0 +1,12 @@
+#RegisterForm,#LoginForm{
+    block-size: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+}
+
+#RegisterForm input,#LoginForm input{
+    margin-block: 1%;
+}

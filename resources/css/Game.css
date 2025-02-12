@@ -1,0 +1,31 @@
+#GameContainer{
+    inline-size: 100%;
+    block-size: 1000px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+}
+
+#DisplayGame{
+    inline-size: 60%;
+    block-size: 80%;
+    background-color: var(--blackTransp);
+    border: 1px solid var(--purple);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#GameInfo{
+    display: flex;
+    inline-size: 100%;
+    margin-block: 1%;
+}
+
+#GameInfo img{
+    block-size: 200px;
+    object-fit: contain;
+    margin-inline: 3%;
+}

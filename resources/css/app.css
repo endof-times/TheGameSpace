@@ -1,0 +1,46 @@
+@import url("./Layout.css");
+@import url("./Home.css");
+@import url("./BestRatings.css");
+@import url("./Auth.css");
+@import url("./Pagination.css");
+@import url("./Game.css");
+
+:root{
+    --black: #131313;
+    --blackTransp: #131313a2;
+    --darkgrey: #252525;
+    --white: #F5F5F5;
+    --purple: #b548fde6 ;
+    --headerHeight: 20px;
+    --navBarHeight: 130px
+}
+
+*{
+    font-size: 16px;
+    font-family: sans-serif;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    background-color: var(--darkgrey);
+}
+
+body::-webkit-scrollbar{
+    width: 10px;
+    background-color: var(--black);
+}
+
+body::-webkit-scrollbar-thumb{
+    background-color: var(--purple);
+    border: 2px solid var(--black);
+}
+
+
+.elementScroll{
+    overflow-y: scroll;
+}
+
+.elementScroll::-webkit-scrollbar{
+    display: none;
+}

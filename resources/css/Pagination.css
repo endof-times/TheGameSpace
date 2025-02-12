@@ -1,0 +1,33 @@
+.linksContainer{
+    margin-inline: 20%;
+    color: var(--white);
+}
+
+.pagination{
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.active{
+    background-color: var(--black);
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.disabled{
+    color: var(--black);
+}
+
+.page-link{
+    text-decoration: none;
+    color:unset;
+}
+
+.page-link:visited{
+    color: var(--purple);
+}
+
+.linksText{
+    text-align: center;
+}
