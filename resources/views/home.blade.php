@@ -4,35 +4,21 @@
         <div id="Slideshow" class="glide">
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
-                    <li class="glide__slide">
-                        <div class="glide__slide__text">
-                            <p>{{ $superMario[0]->Name }}</p>
-                            <p>{{ $superMario[0]->Platform }}</p>
-                            <p>{{ $superMario[0]->Publisher }}</p>
-                            <p>{{ $superMario[0]->Year }}</p>
-                        </div>
-                    </li>
-                    <li class="glide__slide">
-                        <div class="glide__slide__text">
-                            <p>{{ $nba[0]->Name }}</p>
-                            <p>{{ $nba[0]->Platform }}</p>
-                            <p>{{ $nba[0]->Publisher }}</p>
-                            <p>{{ $nba[0]->Year }}</p>
-                        </div>
-                    </li>
-                    <li class="glide__slide">
-                        <div class="glide__slide__text">
-                            <p>{{ $assassinsCreed[0]->Name }}</p>
-                            <p>{{ $assassinsCreed[0]->Platform }}</p>
-                            <p>{{ $assassinsCreed[0]->Publisher }}</p>
-                            <p>{{ $assassinsCreed[0]->Year }}</p>
-                        </div>
-                    </li>
+                    @foreach ($favorites as $game)
+                        <li class="glide__slide">
+                            <div class="glide__slide__text">
+                                <p>{{ $game->Name }}</p>
+                                <p>{{ $game->Platform }}</p>
+                                <p>{{ $game->Publisher }}</p>
+                                <p>{{ $game->Year }}</p>
+                            </div>
+                        </li>
+                    @endforeach
                 </ul>
             </div>
         </div>
         <script type="module">
-            new Glide(".glide",{
+            new Glide(".glide", {
                 startAt: 0,
                 perView: 1,
                 animationDuration: 800,

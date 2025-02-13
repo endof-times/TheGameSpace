@@ -24,7 +24,7 @@ class GameSeeder extends Seeder
             }
             if (!$heading)
             {
-                $employee = array(
+                $game = array(
                     "Name" => $record['1'],
                     "Platform" => $record['2'],
                     "Year" => $year,
@@ -36,7 +36,7 @@ class GameSeeder extends Seeder
                     "Other_Sales" => $record['9'],
                     "Global_Sales" => $record['10']
                 );
-                Game::create($employee);
+                Game::create($game);
             }
             $heading = false;
         }
