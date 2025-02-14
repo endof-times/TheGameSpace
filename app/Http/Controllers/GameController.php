@@ -4,16 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Game;
+use App\Helpers\GetGlobData;
 
 class GameController extends Controller
 {
     function home(Game $id)
     {
         $latestGames = $id->orderByDesc('Year');
-        $fav1 = $id->where('Name', 'like', 'Super Mario Bros.')->where('Platform', '=', 'NES')->get();
-        $fav2 = $id->where('Name', 'like', 'NBA 2K14')->where('Platform', '=', 'PS4')->get();
-        $fav3 = $id->where('Name', 'like', "Assassin's Creed II")->where('Platform', '=', 'PS3')->get();
-        $favorites = [$fav1[0], $fav2[0], $fav3[0]];
+        $favorites = GetGlobData::Favorites();
 
         return view('home', [
             'latestGames' => $latestGames->paginate(30),
@@ -23,7 +21,7 @@ class GameController extends Controller
 
     function bestsellers(Game $id)
     {
-        $bestsellers = $id->orderByDesc('Global_Sales')->paginate(10);
+        $bestsellers = $id->orderByDesc('Global_Sales')->paginate(30);
         return view('bestsellers', [
             'bestsellers' => $bestsellers,
         ]);
@@ -56,5 +54,19 @@ class GameController extends Controller
         return view('shared.game', [
             'game' => $selectedGame,
         ]);
+    }
+
+    function platforms()
+    {
+        $platforms = GetGlobData::Platforms("database/data/vgsales.csv");
+        return view("platforms", [
+            "platforms" => $platforms,
+        ]);
+    }
+
+    function platform(Game $id){
+        $plat = request()->get("plat");
+        $selectedPlat = $id->where("Platform", "=", $plat)->get();
+        return view("shared.platform", ["platformGames"=> $selectedPlat, "platform" => $plat]);
     }
 }

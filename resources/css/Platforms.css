@@ -1,0 +1,15 @@
+#Platforms{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding-inline: 20%;
+    block-size: 800px;
+    margin-block: 50px;
+}
+
+.platformsCard{
+    color: var(--white);
+    border: 1px solid var(--purple);
+    text-align: center;
+    align-content: center;
+    background-color: var(--black)
+}

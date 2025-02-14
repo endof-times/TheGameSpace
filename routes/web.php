@@ -18,3 +18,5 @@ Route::prefix('auth/')->group(function () {
 
 Route::get('/search',[GameController::class, 'search'])->name('search');
 Route::get('/game', [GameController::class, 'show'])->name('showGame');
+Route::get('/platforms', [GameController::class, 'platforms'])->name('platforms');
+Route::get('/platform', [GameController::class, 'platform'])->name('platform');

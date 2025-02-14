@@ -22,6 +22,7 @@ class GameSeeder extends Seeder
             if($record['3'] !== "N/A"){
                 $year = $record['3'];
             }
+            
             if (!$heading)
             {
                 $game = array(

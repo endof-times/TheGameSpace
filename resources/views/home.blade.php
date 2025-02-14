@@ -26,9 +26,10 @@
             }).mount()
         </script>
     </div>
-    <div id="LatestArticles" class="elementScroll">
-        <h2>Latest</h2>
+    <div class="gamesListContainer elementScroll">
+
         <div class="gamesCardContainer">
+            <h2>Latest</h2>
             @foreach ($latestGames as $game)
                 @include('shared.gamescard')
             @endforeach

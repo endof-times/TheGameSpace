@@ -1,8 +1,0 @@
-#BestRatings{
-    display: flex;
-    flex-direction: column;
-    margin-inline: 20%;
-    padding-block-start: 2%;
-    block-size: 800px;
-    color: var(--white);
-}

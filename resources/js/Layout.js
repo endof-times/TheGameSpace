@@ -17,13 +17,8 @@ NavLink.on("mouseover", function () {
 })
 
 //Searchbar animation and functions
-SearchBox.on("focusin", function () {
-    SearchBar.addClass("searchBarFocus")
+SearchBox.on("keyup", function (event) {
     if ($(this).val() != "") {
-        SearchResults.css({ "display": "unset" })
-    }
-}).on("keyup", function (event) {
-    if (event.code != "Enter" && event.code != "ControlLeft" && event.code != "ControlRight" && $(this).val() != "") {
         SearchResults.css({ "display": "unset" })
         SearchBar.addClass("searchBarFocus")
     } else {
@@ -36,13 +31,18 @@ SearchBox.on("focusin", function () {
         type: "GET",
         success: function (response) {
             SearchResults.empty()
-            for (let i = 0; i < response.length; i++) {
-                const searchItem = $(`<p> + ${response[i].Name} - ${response[i].Platform}</p>`)
-                SearchResults.append(searchItem)
-                searchItem.on("click", function(){
-                    window.open(appURL + `/game/?game=${response[i].Name}&platform=${response[i].Platform}`, "_self")
-                })
+            if ( response.length != 0 ) {
+                for (let i = 0; i < response.length; i++) {
+                    const searchItem = $(`<p> + ${response[i].Name} - ${response[i].Platform}</p>`)
+                    SearchResults.append(searchItem)
+                    searchItem.on("click", function () {
+                        window.open(appURL + `/game/?game=${response[i].Name}&platform=${response[i].Platform}`, "_self")
+                    })
 
+                }
+            }else{
+                const searchItem = $(`<p>No results found</p>`);
+                SearchResults.append(searchItem);
             }
         },
         error: function (error) {
@@ -76,7 +76,7 @@ $(window).on("click", function (event) {
         SettingsButton.css("color", "white")
     }
 
-    if(!event.target.matches("#SearchBar *") && !event.target.matches("#SearchResults *")){
+    if (!event.target.matches("#SearchBar *") && !event.target.matches("#SearchResults *")) {
         SearchResults.css("display", "none")
         SearchBar.removeClass("searchBarFocus")
     }

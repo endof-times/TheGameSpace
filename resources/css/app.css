@@ -1,9 +1,9 @@
 @import url("./Layout.css");
 @import url("./Home.css");
-@import url("./BestRatings.css");
 @import url("./Auth.css");
 @import url("./Pagination.css");
 @import url("./Game.css");
+@import url("./Platforms.css");
 
 :root{
     --black: #131313;
@@ -23,7 +23,7 @@
 body{
     margin: 0;
     padding: 0;
-    background-color: var(--darkgrey);
+    background-color: var(--black);
 }
 
 body::-webkit-scrollbar{
@@ -34,13 +34,4 @@ body::-webkit-scrollbar{
 body::-webkit-scrollbar-thumb{
     background-color: var(--purple);
     border: 2px solid var(--black);
-}
-
-
-.elementScroll{
-    overflow-y: scroll;
-}
-
-.elementScroll::-webkit-scrollbar{
-    display: none;
 }
