@@ -5,6 +5,7 @@ use App\Models\Game;
 
 class GetGlobData
 {
+    //Used to get the platforms stored in the dataset
     public static function Platforms(string $FilePath)
     {
         $platforms = [];
@@ -27,9 +28,12 @@ class GetGlobData
         }
         fclose($input_file);
 
-        return $platforms;
+        foreach($platforms as $plat){
+            echo "\"". $plat ."\",";
+        }
     }
 
+    //List of 3 pre-selected games
     public static function Favorites(){
         $fav1 = Game::where('Name', 'like', 'Super Mario Bros.')->where('Platform', '=', 'NES')->get();
         $fav2 = Game::where('Name', 'like', 'NBA 2K14')->where('Platform', '=', 'PS4')->get();

@@ -8,6 +8,7 @@ use App\Helpers\GetGlobData;
 
 class GameController extends Controller
 {
+    //Return home view
     function home(Game $id)
     {
         $latestGames = $id->orderByDesc('Year');
@@ -19,6 +20,7 @@ class GameController extends Controller
         ]);
     }
 
+    //Return bestsellers view
     function bestsellers(Game $id)
     {
         $bestsellers = $id->orderByDesc('Global_Sales')->paginate(30);
@@ -27,6 +29,7 @@ class GameController extends Controller
         ]);
     }
 
+    //Return mostdiscussed view
     function mostdiscussed()
     {
         $mostdiscussed = 50;
@@ -35,6 +38,7 @@ class GameController extends Controller
         ]);
     }
 
+    //Ajax search request
     function search(Game $id)
     {
         if (request()->has('term')) {
@@ -44,6 +48,7 @@ class GameController extends Controller
         return redirect()->route('home');
     }
 
+    //Return game page view
     function show(Game $id)
     {
         $gameName = request()->get('game');
@@ -56,14 +61,16 @@ class GameController extends Controller
         ]);
     }
 
+    //Return platforms view
     function platforms()
     {
-        $platforms = GetGlobData::Platforms("database/data/vgsales.csv");
+        $platforms = ["Wii","NES","GB","DS","X360","PS3","PS2","SNES","GBA","3DS","PS4","N64","PS","XB","PC","2600","PSP","XOne","GC","WiiU","GEN","DC","PSV","SAT","SCD","WS","NG","TG16","3DO","GG","PCFX"];
         return view("platforms", [
             "platforms" => $platforms,
         ]);
     }
 
+    //Return all games from selected platform
     function platform(Game $id){
         $plat = request()->get("plat");
         $selectedPlat = $id->where("Platform", "=", $plat)->get();
