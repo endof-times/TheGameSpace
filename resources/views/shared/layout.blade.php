@@ -13,9 +13,18 @@
 
 <body>
     @guest
-        <div id="Header">To leave a comment <a href="{{ route('register') }}">Register</a>.Or <a
+        <div id="Header" class="guest">To leave a comment <a href="{{ route('register') }}">Register</a>.Or <a
                 href="{{ route('login') }}">Login</a> if you already have an account.</div>
     @endguest
+    @auth
+        @if (session()->has('success'))
+            <p>{{ session('success') }}</p>
+        @endif
+        <div id="Header" class="auth">
+            <a href="">{{ Auth::user()->name }}</a>
+            <a href="{{ route('logout') }}">Logout</a>
+        </div>
+    @endauth
     <div id="NavBar">
         <div id="LogoContainer">
             <img src="{{ Vite::asset('resources/media/TGSPurple.png') }}" alt="Logo">

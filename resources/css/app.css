@@ -4,6 +4,7 @@
 @import url("./Pagination.css");
 @import url("./Game.css");
 @import url("./Platforms.css");
+@import url("./Comments.css");
 
 :root{
     --black: #131313;

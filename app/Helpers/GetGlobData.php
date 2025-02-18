@@ -5,33 +5,7 @@ use App\Models\Game;
 
 class GetGlobData
 {
-    //Used to get the platforms stored in the dataset
-    public static function Platforms(string $FilePath)
-    {
-        $platforms = [];
-        $input_file = fopen(base_path($FilePath), 'r');
-        while (($record = fgetcsv($input_file, 1000, ',')) !== false) {
-            $found = false;
-            for ($i = 0; $i < count($platforms); $i++) {
-                if ($platforms[$i] != $record[2]) {
-                    $found = false;
-                } else {
-                    $found = true;
-                    $i = count($platforms);
-                }
-            }
-            if (!$found) {
-                $platforms[] = $record[2];
-            }
-
-            $heading = false;
-        }
-        fclose($input_file);
-
-        foreach($platforms as $plat){
-            echo "\"". $plat ."\",";
-        }
-    }
+    public static $Platforms = ["Wii","NES","GB","DS","X360","PS3","PS2","SNES","GBA","3DS","PS4","N64","PS","XB","PC","2600","PSP","XOne","GC","WiiU","GEN","DC","PSV","SAT","SCD","WS","NG","TG16","3DO","GG","PCFX"];
 
     //List of 3 pre-selected games
     public static function Favorites(){
@@ -41,3 +15,33 @@ class GetGlobData
         return $favorites = [$fav1[0], $fav2[0], $fav3[0]];
     }
 }
+
+    // Used to get the platforms stored in the dataset,
+    // Can be used to get other attributes by changing $record index
+    //
+    // public static function Platforms(string $FilePath)
+    // {
+    //     $platforms = [];
+    //     $input_file = fopen(base_path($FilePath), 'r');
+    //     while (($record = fgetcsv($input_file, 1000, ',')) !== false) {
+    //         $found = false;
+    //         for ($i = 0; $i < count($platforms); $i++) {
+    //             if ($platforms[$i] != $record[2]) { //change this $record index to get other attributes
+    //                 $found = false;
+    //             } else {
+    //                 $found = true;
+    //                 $i = count($platforms);
+    //             }
+    //         }
+    //         if (!$found) {
+    //             $platforms[] = $record[2];
+    //         }
+
+    //         $heading = false;
+    //     }
+    //     fclose($input_file);
+
+    //     foreach($platforms as $plat){
+    //         echo "\"". $plat ."\",";
+    //     }
+    // }

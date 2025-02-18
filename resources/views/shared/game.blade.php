@@ -5,16 +5,36 @@
             <div id="GameInfo">
                 <img src="https://placehold.co/1920x1080/131313/F5F5F5/?text=Game" alt="GameImage">
                 <div id="GameInfoText">
-                    <p>Name: {{ $game[0]->Name }}</p>
-                    <p>Platform: {{ $game[0]->Platform }}</p>
-                    <p>Year: {{ $game[0]->Year ? $game[0]->Year : "N/A" }}</p>
-                    <p>Genre: {{ $game[0]->Genre }}</p>
-                    <p>Publisher: {{ $game[0]->Publisher }}</p>
+                    <p>Name: {{ $game->Name }}</p>
+                    <p>Platform: {{ $game->Platform }}</p>
+                    <p>Year: {{ $game->Year ? $game->Year : 'N/A' }}</p>
+                    <p>Genre: {{ $game->Genre }}</p>
+                    <p>Publisher: {{ $game->Publisher }}</p>
                 </div>
             </div>
-            @guest
-                <p class="loginToComment">Login to leave a comment</p>
-            @endguest
+            <div id="CommentSection">
+                @guest
+                    <p class="loginToComment">Login to leave a comment</p>
+                @endguest
+                @auth
+                    <form action="{{ route('commentSubmit', [Auth::user()->id, $game->id]) }}" id="CommentSubmit" method="post">
+                        @csrf
+                        <textarea name="comment" id="Comment" cols="60" rows="5"></textarea>
+                        <input type="submit" id="CommentSubmitBtn" value="Submit Comment">
+                    </form>
+                    @error("comment")
+                    <p id="CommentErrorMsg">{{ $message }}</p>
+                    @enderror
+                @endauth
+                <div id="ShowComments">
+                    @foreach ($game->comments as $comment)
+                        <div id="CommentCard">
+                            <h3>{{ $comment->user->name }}: </h3>
+                            <p>{{ $comment->comment }}</p>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
         </div>
     </div>
 @endsection

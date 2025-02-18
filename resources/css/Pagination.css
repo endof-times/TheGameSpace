@@ -1,6 +1,5 @@
 .linksContainer{
     margin-inline: 20%;
-    color: var(--white);
 }
 
 .pagination{
@@ -9,19 +8,21 @@
     justify-content: space-between;
 }
 
-.active{
-    background-color: var(--black);
-    padding: 5px;
+
+.page-item.active{
+    padding: 10px;
     border-radius: 3px;
+    border: 1px solid var(--purple);
+    color: var(--purple);
 }
 
 .disabled{
-    color: var(--black);
+    color: var(--purple);
 }
 
 .page-link{
     text-decoration: none;
-    color:unset;
+    color: unset;
 }
 
 .page-link:visited{

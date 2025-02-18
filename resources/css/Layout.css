@@ -1,10 +1,19 @@
 #Header{
     block-size: var(--headerHeight);
-    background-color: var(--purple);
     color: var(--darkgrey);
     text-align: center;
     font-size: .8em;
 }
+
+#Header.guest{
+    background-color: var(--purple);
+}
+
+#Header.auth a{
+    color: var(--purple);
+    text-decoration: none;
+}
+
 
 #Header a{
     color: var(--black);

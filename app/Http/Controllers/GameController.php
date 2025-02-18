@@ -54,8 +54,9 @@ class GameController extends Controller
         $gameName = request()->get('game');
         $gamePlatform = request()->get('platform');
         if (request()->has('game')) {
-            $selectedGame = $id->where('Name', '=', $gameName)->where('Platform', '=', $gamePlatform)->get();
+            $game = $id->where('Name', '=', $gameName)->where('Platform', '=', $gamePlatform)->get();
         }
+        $selectedGame = $game[0];
         return view('shared.game', [
             'game' => $selectedGame,
         ]);
@@ -64,7 +65,7 @@ class GameController extends Controller
     //Return platforms view
     function platforms()
     {
-        $platforms = ["Wii","NES","GB","DS","X360","PS3","PS2","SNES","GBA","3DS","PS4","N64","PS","XB","PC","2600","PSP","XOne","GC","WiiU","GEN","DC","PSV","SAT","SCD","WS","NG","TG16","3DO","GG","PCFX"];
+        $platforms = GetGlobData::$Platforms;
         return view("platforms", [
             "platforms" => $platforms,
         ]);
@@ -73,7 +74,18 @@ class GameController extends Controller
     //Return all games from selected platform
     function platform(Game $id){
         $plat = request()->get("plat");
-        $selectedPlat = $id->where("Platform", "=", $plat)->get();
+        $selectedPlat = $id->where("Platform", "=", $plat)->paginate(30);
+
+        if(request()->has("sortorder")){
+            if(request()->get("sortorder") == "Alphabetical"){
+                $selectedPlat = $id->where("Platform", "=", $plat)->orderBy("Name")->paginate(30);
+            }else if (request()->get("sortorder") == "Latest"){
+                $selectedPlat = $id->where("Platform", "=", $plat)->orderByDesc("Year")->paginate(30);
+            }else if (request()->get("sortorder") == "GlobSales"){
+                $selectedPlat = $id->where("Platform", "=", $plat)->orderByDesc("Global_Sales")->paginate(30);
+            }
+        }
+
         return view("shared.platform", ["platformGames"=> $selectedPlat, "platform" => $plat]);
     }
 }

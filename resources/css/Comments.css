@@ -1,0 +1,50 @@
+#CommentSection{
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    width: 80%;
+    block-size: 70%;
+}
+
+#CommentSubmit{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#Comment{
+    border: 1px solid var(--purple);
+    background-color: var(--black);
+    color: var(--white);
+    margin-block-end: 2%;
+}
+
+#CommentSubmitBtn{
+    inline-size: 50%;
+    background-color: var(--black);
+    border: 1px solid var(--purple);
+    color: var(--white);
+    cursor: pointer;
+}
+
+#CommentErrorMsg{
+    color: var(--white);
+}
+
+#ShowComments{
+    overflow-y: scroll;
+}
+
+#ShowComments::-webkit-scrollbar{
+    display: none;
+}
+
+#CommentCard{
+    border-bottom: 1px solid var(--purple);
+}
+
+#CommentCard h3{
+    font-size: 1.2em;
+    font-weight: 800;
+    color: var(--purple);
+}

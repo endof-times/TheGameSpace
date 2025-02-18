@@ -13,3 +13,28 @@
     align-content: center;
     background-color: var(--black)
 }
+
+#PageSettings{
+    inline-size: 98%;
+    display: flex;
+    align-items: center;
+}
+
+#PageSettings h2{
+    inline-size: 20%;
+}
+
+#PlatformSort{
+    background-color: var(--black);
+    outline: none;
+    border: 1px solid var(--purple);
+    color: var(--white);
+    cursor: pointer;
+    appearance: none;
+    margin: 0;
+    text-align: center;
+}
+
+#PlatformSort option{
+    cursor: pointer;
+}
