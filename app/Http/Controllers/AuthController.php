@@ -59,4 +59,8 @@ class AuthController extends Controller
 
         return redirect()->route("home")->with("deleted", "Logged Out!");
     }
+
+    function show(User $id){
+        return view("auth.profile", ["user" => $id]);
+    }
 }

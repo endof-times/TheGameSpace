@@ -30,22 +30,23 @@ class GameController extends Controller
     }
 
     //Return mostdiscussed view
-    function mostdiscussed()
+    function mostdiscussed(Game $id)
     {
-        $mostdiscussed = 50;
+        $games = $id->has('comments', ">", 0)->paginate(30);
+        $games = GetGlobData::BubbleSort($games);
         return view('mostdiscussed', [
-            'mostdiscussed' => $mostdiscussed,
+            'mostdiscussed' => $games,
         ]);
     }
 
     //Ajax search request
     function search(Game $id)
     {
+        $term = request()->get('term');
         if (request()->has('term')) {
-            $resp = $id->where('Name', 'like', '%' . request()->get('term') . '%')->get();
+            $resp = $id->where('Name', 'like', '%' . $term . '%')->get();
             return response()->json($resp);
         }
-        return redirect()->route('home');
     }
 
     //Return game page view
@@ -56,7 +57,9 @@ class GameController extends Controller
         if (request()->has('game')) {
             $game = $id->where('Name', '=', $gameName)->where('Platform', '=', $gamePlatform)->get();
         }
+
         $selectedGame = $game[0];
+
         return view('shared.game', [
             'game' => $selectedGame,
         ]);
@@ -66,26 +69,30 @@ class GameController extends Controller
     function platforms()
     {
         $platforms = GetGlobData::$Platforms;
-        return view("platforms", [
-            "platforms" => $platforms,
+        return view('platforms', [
+            'platforms' => $platforms,
         ]);
     }
 
     //Return all games from selected platform
-    function platform(Game $id){
-        $plat = request()->get("plat");
-        $selectedPlat = $id->where("Platform", "=", $plat)->paginate(30);
+    function platform(Game $id)
+    {
+        $plat = request()->get('plat');
+        $selectedPlat = $id->where('Platform', '=', $plat)->paginate(30);
 
-        if(request()->has("sortorder")){
-            if(request()->get("sortorder") == "Alphabetical"){
-                $selectedPlat = $id->where("Platform", "=", $plat)->orderBy("Name")->paginate(30);
-            }else if (request()->get("sortorder") == "Latest"){
-                $selectedPlat = $id->where("Platform", "=", $plat)->orderByDesc("Year")->paginate(30);
-            }else if (request()->get("sortorder") == "GlobSales"){
-                $selectedPlat = $id->where("Platform", "=", $plat)->orderByDesc("Global_Sales")->paginate(30);
+        if (request()->has('sortorder')) {
+            if (request()->get('sortorder') == 'Alphabetical') {
+                $selectedPlat = $id->where('Platform', '=', $plat)->orderBy('Name')->paginate(30);
+            } elseif (request()->get('sortorder') == 'Latest') {
+                $selectedPlat = $id->where('Platform', '=', $plat)->orderByDesc('Year')->paginate(30);
+            } elseif (request()->get('sortorder') == 'GlobSales') {
+                $selectedPlat = $id->where('Platform', '=', $plat)->orderByDesc('Global_Sales')->paginate(30);
+            } else if(request()->get('sortorder') == 'MostDiscussed'){
+                $selectedPlat = $id->has('comments', '>', 0)->where('Platform', '=', $plat)->paginate(30);
+                $selectedPlat = GetGlobData::BubbleSort($selectedPlat);
             }
         }
 
-        return view("shared.platform", ["platformGames"=> $selectedPlat, "platform" => $plat]);
+        return view('shared.platform', ['platformGames' => $selectedPlat, 'platform' => $plat]);
     }
 }

@@ -16,10 +16,8 @@ Route::prefix('auth/')->group(function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/login', [AuthController::class, 'authenticate']);
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
-});
-
-Route::prefix('comment/')->group(function(){
     Route::post('submit/{user_id}/{game_id}', [CommentController::class, 'submit'])->name('commentSubmit');
+    Route::get('/user/{user_id}', [AuthController::class, 'show'])->name('profile');
 });
 
 Route::get('/search',[GameController::class, 'search'])->name('search');

@@ -2,6 +2,7 @@
 namespace App\Helpers;
 
 use App\Models\Game;
+use Illuminate\Database\Eloquent\Collection;
 
 class GetGlobData
 {
@@ -13,6 +14,20 @@ class GetGlobData
         $fav2 = Game::where('Name', 'like', 'NBA 2K14')->where('Platform', '=', 'PS4')->get();
         $fav3 = Game::where('Name', 'like', "Assassin's Creed II")->where('Platform', '=', 'PS3')->get();
         return $favorites = [$fav1[0], $fav2[0], $fav3[0]];
+    }
+
+    public static function BubbleSort($gameArr) {
+        $n = count($gameArr);
+        for ($i = 0; $i < $n - 1; $i++) {
+            for ($j = 0; $j < $n - $i - 1; $j++) {
+                if ($gameArr[$j]->comments->count() < $gameArr[$j + 1]->comments->count()) {
+                    $temp = $gameArr[$j];
+                    $gameArr[$j] = $gameArr[$j + 1];
+                    $gameArr[$j + 1] = $temp;
+                }
+            }
+        }
+        return $gameArr;
     }
 }
 

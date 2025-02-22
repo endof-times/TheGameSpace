@@ -19,7 +19,7 @@
                 @auth
                     <form action="{{ route('commentSubmit', [Auth::user()->id, $game->id]) }}" id="CommentSubmit" method="post">
                         @csrf
-                        <textarea name="comment" id="Comment" cols="60" rows="5"></textarea>
+                        <textarea name="comment" id="Comment" cols="60" rows="5" autofocus></textarea>
                         <input type="submit" id="CommentSubmitBtn" value="Submit Comment">
                     </form>
                     @error("comment")

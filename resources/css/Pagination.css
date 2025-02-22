@@ -1,5 +1,6 @@
 .linksContainer{
     margin-inline: 20%;
+    color: var(--white);
 }
 
 .pagination{

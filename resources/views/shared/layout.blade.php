@@ -21,7 +21,7 @@
             <p>{{ session('success') }}</p>
         @endif
         <div id="Header" class="auth">
-            <a href="">{{ Auth::user()->name }}</a>
+            <a href="{{ route("profile", Auth::user()->id) }}">{{ Auth::user()->name }}</a>
             <a href="{{ route('logout') }}">Logout</a>
         </div>
     @endauth
@@ -31,9 +31,9 @@
         </div>
         <nav id="Navigation">
             <a href="{{ route('home') }}">Home</a>
-            <a href="{{ route('bestsellers') }}">Best Sellers</a>
-            <a href="{{ route('mostdiscussed') }}">Most discussed</a>
-            <a href="{{ route('platforms') }}">Platforms</a>
+            <a href="{{ route('bestsellers') }}" class="{{ request()->path() == "bestsellers" ? "selectedPage" : "" }}">Best Sellers</a>
+            <a href="{{ route('mostdiscussed') }}" class="{{ request()->path() == "mostdiscussed" ? "selectedPage" : "" }}">Most discussed</a>
+            <a href="{{ route('platforms') }}" class="{{ request()->path() == "platforms" ? "selectedPage" : "" }}">Platforms</a>
         </nav>
         <div id="SearchBar">
             <input type="text" name="SearchReviews" id="SearchBox" autocomplete="off">
