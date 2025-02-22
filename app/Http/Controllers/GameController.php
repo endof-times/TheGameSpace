@@ -42,9 +42,8 @@ class GameController extends Controller
     //Ajax search request
     function search(Game $id)
     {
-        $term = request()->get('term');
         if (request()->has('term')) {
-            $resp = $id->where('Name', 'like', '%' . $term . '%')->get();
+            $resp = $id->where('Name', 'like', '%' . request()->get('term') . '%')->get();
             return response()->json($resp);
         }
     }
